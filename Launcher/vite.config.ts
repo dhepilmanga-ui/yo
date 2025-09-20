@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 const r = (p: string) => path.resolve(path.dirname(fileURLToPath(import.meta.url)), p);
-const monorepoRoot = r('../..');
+const monorepoRoot = r('..');
 
 export default defineConfig({
   root: r('.'),

@@ -1,31 +1,32 @@
 {
-  "name": "yuzha-template",
+  "name": "yuzha-yo",
   "private": true,
   "type": "module",
   "version": "0.1.0",
-  "description": "Template for Yuzha monorepo base tooling (no app logic).",
+  "description": "Monorepo for Yuzha Yo base tooling (no app logic).",
   "engines": {
     "node": ">=20"
   },
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "Launcher"
   ],
   "scripts": {
     "dev": "npm run dev:launcher",
-    "dev:launcher": "npm run dev -w apps/Launcher",
+    "dev:launcher": "npm run dev --workspace Launcher",
     "build": "npm run build:launcher",
-    "build:launcher": "npm run build -w apps/Launcher",
-    "clean": "rimraf apps/**/dist apps/**/node_modules/.vite",
+    "build:launcher": "npm run build --workspace Launcher",
+    "clean": "rimraf \"Launcher/dist\" \"Launcher/node_modules/.vite\" \"apps/**/dist\" \"apps/**/node_modules/.vite\"",
     "typecheck": "tsc --noEmit -p tsconfig.base.json",
-    "typecheck:launcher": "npm run typecheck -w apps/Launcher",
+    "typecheck:launcher": "npm run typecheck --workspace Launcher",
     "ci:verify": "npm run lint && npm run typecheck && npm run test && npm run build",
-    "lint": "eslint apps/**/src/**/*.{ts,tsx} --cache --max-warnings=0",
-    "lint:fix": "eslint apps/**/src/**/*.{ts,tsx} --cache --fix",
+    "lint": "eslint \"Launcher/src/**/*.{ts,tsx}\" \"apps/**/src/**/*.{ts,tsx}\" --cache --no-error-on-unmatched-pattern --max-warnings=0",
+    "lint:fix": "eslint \"Launcher/src/**/*.{ts,tsx}\" \"apps/**/src/**/*.{ts,tsx}\" --cache --no-error-on-unmatched-pattern --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:cov": "vitest run --coverage"
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest --passWithNoTests",
+    "test:cov": "vitest run --passWithNoTests --coverage"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",

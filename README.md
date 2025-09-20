@@ -1,38 +1,42 @@
-# Yuzha Template Monorepo
+# Yuzha Yo Monorepo
 
-Base tooling for the Yuzha apps without any domain logic. Use this template to spin up new module workspaces that share the same linting, testing, and deployment defaults.
+Shared tooling for the Yuzha Yo launcher and its future modules. The root `Launcher/` workspace drives local development and can be cloned into `apps/` whenever a new deployable module is needed.
 
 ## Prerequisites
 - Node.js 20+
 - npm 10+
 
-## Getting Started
+## Quick Start
 ```bash
 npm install
 npm run dev
 ```
-The default `dev` command proxies to the Launcher workspace (`apps/Launcher`). Duplicate that folder when creating a new module.
+`npm run dev` boots the launcher from `Launcher/`. Duplicate that workspace into `apps/<ModuleName>` when you want an additional module.
 
-## Available Scripts
-- `npm run dev` - start the Launcher workspace in Vite dev mode.
-- `npm run build` - build the Launcher workspace.
-- `npm run lint` - run ESLint across all workspaces.
-- `npm run typecheck` - perform a project-wide TypeScript check.
-- `npm run test` - execute the Vitest test suite.
+## Scripts
+- `npm run dev` – start the Launcher workspace in Vite dev mode.
+- `npm run build` – build the Launcher workspace.
+- `npm run lint` – lint `Launcher/` and every workspace under `apps/` (ignores missing globs).
+- `npm run typecheck` – run a repo-wide TypeScript check via `tsconfig.base.json`.
+- `npm run test` – execute Vitest with `--passWithNoTests` so blank templates succeed.
+- `npm run clean` – remove build and Vite cache output for all workspaces.
 
-## Monorepo Layout
-- `apps/Launcher` - minimal shell app ready to be cloned for new modules.
-- `shared/` - placeholder utilities, styles, and storage helpers for cross-app reuse.
-- `netlify.toml` - shared redirects and headers for every Netlify deployment.
+## Workspace Layout
+- `Launcher/` – root launcher app; copy this into `apps/` to scaffold new modules.
+- `apps/` – reserved for independent modules (`apps/<ModuleName>`).
+- `shared/` – cross-workspace utilities accessed through the `@shared/*` alias.
+- `netlify.toml` – shared SPA redirects, headers, and launcher build configuration.
+- `_AI_Agent_Playbook/` – automation guidance for agents collaborating on this repo.
 
 ## Creating a New Module
-1. Copy `apps/Launcher` to `apps/<ModuleName>`.
-2. Update the new workspace `package.json` name, Vite config ports, and any env declarations.
-3. Add workspace-specific scripts (`dev`, `build`, `typecheck`) if they differ from the Launcher defaults.
-4. Import shared utilities from `@shared/*` as you implement real features.
+1. Copy `Launcher/` to `apps/<ModuleName>`.
+2. Update the copied `package.json` name, ports, and env declarations as needed.
+3. Wire up workspace-specific scripts if they differ from the launcher defaults.
+4. Import shared utilities from `@shared/*` when building features.
+5. Add the workspace to any relevant deployment configuration.
 
 ## Environment Variables
-Global overrides live in `.env.local` (see `env.local.example`). Each workspace can also define its own `.env.local` by copying `.env.local.example` inside the workspace folder.
+Global overrides live in `.env.local` (see `env.local.example`). Each workspace can keep its own `.env.local` by copying the example file into that workspace.
 
 ## Deployment
-Netlify sites can reuse `netlify.toml`. Configure each site to build from its workspace directory (e.g., base `apps/Launcher`, build command `npm run build`, publish `apps/Launcher/dist`).
+Netlify sites can reuse `netlify.toml`. Configure the launcher site with base `Launcher`, build command `npm run build --workspace Launcher`, and publish directory `Launcher/dist`. Modules under `apps/` should declare their own base/build/publish settings if deployed independently.
