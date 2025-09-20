@@ -3,8 +3,8 @@
  */
 
 import { useRef, useEffect, useState } from 'react'
-import { StageTransformManager } from '../engine/transform'
-import type { StageTransform, StageCoordinates } from '../engine/transform'
+import { StageTransformManager } from '../stages/transform'
+import type { StageTransform, StageCoordinates } from '../stages/transform'
 
 export function useTransform() {
   const managerRef = useRef<StageTransformManager | null>(null)

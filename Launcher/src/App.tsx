@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
-import type { StageAdapter, EngineStatus } from '@shared/engine/adapter'
-import { ThreeStageAdapter } from '@shared/engine/three-adapter'
+import type { StageAdapter, EngineStatus } from '@shared/stages/adapter'
+import { ThreeStageAdapter } from '@shared/stages/three-adapter'
 
 function App() {
   const containerRef = useRef<HTMLDivElement>(null)

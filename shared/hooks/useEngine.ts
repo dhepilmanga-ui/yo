@@ -3,7 +3,7 @@
  */
 
 import { useRef, useEffect, useState } from 'react'
-import { ThreeStageAdapter } from '../engine/three-adapter'
+import { ThreeStageAdapter } from '../stages/three-adapter'
 import type { EngineConfig, EngineStatus } from '../types/engine'
 
 export function useEngine(config?: Partial<EngineConfig>) {
