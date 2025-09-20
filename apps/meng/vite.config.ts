@@ -17,11 +17,11 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 5174,
+    port: 5001,
   },
   preview: {
     host: '0.0.0.0',
-    port: 5174,
+    port: 5001,
   },
   build: {
     target: 'es2020',

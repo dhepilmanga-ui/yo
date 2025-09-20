@@ -22,7 +22,7 @@ const modules: ModuleDescriptor[] = [
     icon: '[POS]',
     highlights: ['Fast tap ordering', 'Keyboard & touch friendly', 'Simple tax handling'],
     command: 'npm run dev --workspace apps/meng',
-    port: 5174,
+    port: 5001,
     productionPath: '/meng',
   },
 ];
